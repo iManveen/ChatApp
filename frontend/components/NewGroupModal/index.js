@@ -40,8 +40,8 @@ const NewGroupModal = () => {
                 autoCorrect={false}
                 placeholder="Enter your group name"
                 style={styles.loginInput}
-                value={currentGroupName}
                 onChangeText={value => setCurrentGroupName(value)}
+                value={currentGroupName}
               />
               <Pressable
                 onPress={() => handleCreateNewRoom()}

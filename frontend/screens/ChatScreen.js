@@ -12,29 +12,51 @@ import ChatComponent from '../components/ChatComponent';
 import NewGroupModal from '../components/NewGroupModal';
 import {socket} from '../utils';
 
-const ChatScreen = () => {
-  
+const ChatScreen = ({navigation, item}) => {
   const {
     currentUsers,
     allChatRooms,
     setAllChatRooms,
     modalVisible,
     setModalVisible,
+    setCurrentUsers,
+    setShowLoginView,
   } = useContext(GlobalContext);
   useEffect(() => {
+    console.log('heyyyyy');
+
     socket.emit('getAllGroups');
     socket.on('groupList', groups => {
-      setAllChatRooms(groups)
+      console.log('Recieved groups', groups);
+      setAllChatRooms(groups);
     });
   }, [socket]);
+  const handleNavigateToMessageScreen = item => {
+    navigation.navigate('MessageScreen', {
+      currentGroupName: item.currentGroupName,
+      currentGroupId: item.id,
+    });
+  };
+  const handleLogout = () => {
+    setCurrentUsers('');
+    setShowLoginView(false)
+  };
+  useEffect(()=>{
+    if(currentUsers.trim()===''){
+      navigation.navigate('HomeScreen')
+    }
 
+
+
+
+  },[currentUsers])
 
   return (
     <View style={styles.container}>
       <View style={styles.Topcontainer}>
         <View style={styles.headerContent}>
           <Text style={styles.welcomeText}>Welcome {currentUsers}! </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleLogout()}>
             <Image
               source={require('../assets/logout.png')}
               style={styles.logoutImg}
@@ -42,17 +64,25 @@ const ChatScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.listContainer}>
+      <TouchableOpacity style={styles.listContainer}>
         {allChatRooms && allChatRooms.length > 0 ? (
           <FlatList
             data={allChatRooms}
-            renderItem={({item}) => <ChatComponent item={item} />}
-            keyExtractor={(item) => item.id}
+            renderItem={({item}) => (
+              <TouchableOpacity
+                onPress={() => handleNavigateToMessageScreen(item)}>
+                {' '}
+                <ChatComponent item={item} />{' '}
+              </TouchableOpacity>
+            )}
+            keyExtractor={item => item.id}
           />
         ) : (
-          <Text style={styles.emptyMessage}>No chat rooms available</Text>
+          (console.log('Fallback:', allChatRooms),
+          (<Text style={styles.emptyMessage}>No chat rooms available</Text>))
         )}
-      </View>
+      </TouchableOpacity>
+
       <View style={styles.bottomContainer}>
         <TouchableOpacity
           onPress={() => setModalVisible(true)}
@@ -61,7 +91,6 @@ const ChatScreen = () => {
         </TouchableOpacity>
       </View>
       {modalVisible && <NewGroupModal />}
-
     </View>
   );
 };
@@ -97,18 +126,19 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
     paddingTop: 10,
+    backgroundColor: 'green',
   },
   emptyMessage: {
     textAlign: 'center',
     marginTop: 20,
-    color: '#A9A9A9',
+    color: 'black',
     fontSize: 16,
   },
   bottomContainer: {
     padding: 16,
     borderTopWidth: 1,
     borderColor: '#E0E0E0',
-    backgroundColor: 'white',
+    backgroundColor: 'red',
   },
   buttonGroup: {
     backgroundColor: '#0084FF',

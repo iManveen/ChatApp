@@ -1,9 +1,9 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {GlobalContext} from '../../context';
 
 const ChatComponent = ({item}) => {
-  const {messages, setMessages} = useContext(GlobalContext);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     setMessages(item.messages[item.messages.length - 1]);
@@ -12,7 +12,7 @@ const ChatComponent = ({item}) => {
   return (
     <View style={styles.container}>
       <View style={styles.userInfo}>
-        <Text style={styles.userName}>{item.name}</Text>
+        <Text style={styles.userName}>{item.currentGroupName}</Text>
         <Text style={styles.message}>
           {messages?.text ? messages.text : 'Tap to start messaging'}
         </Text>
