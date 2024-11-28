@@ -2,12 +2,10 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
 const MessageComponent = ({currentUsers, item}) => {
-  // Assuming currentUsers is an object with id property (you might need to adjust this)
   const currentUserStatus = item.currentUsers !== currentUsers.id;
 
-  // Check if the message text is empty
   if (!item.text.trim()) {
-    return null; // Do not render the message if text is empty
+    return null;
   }
 
   return (
@@ -33,7 +31,6 @@ const styles = StyleSheet.create({
   },
   left: {
     alignItems: 'flex-start',
-
   },
   right: {
     alignItems: 'flex-end',
@@ -47,10 +44,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'black',
     marginTop: 5,
-    fontWeight:600,
+    fontWeight: 600,
   },
-  messageText:{
-    color:"black",
-    fontWeight:700
-  }
+  messageText: {
+    color: 'black',
+    fontWeight: 700,
+  },
 });

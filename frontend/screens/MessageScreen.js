@@ -73,7 +73,6 @@ const MessageScreen = ({navigation, route}) => {
         )}
       </ScrollView>
 
-      {/* Message input and send button container centered on the screen */}
       <View style={styles.messageInputContainerWrapper}>
         <View style={styles.messageInputContainer}>
           <TextInput
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: 'lightblue',
-    justifyContent: 'center', // Centers vertically
+    justifyContent: 'center', 
   
   },
   innerWrapper: {
@@ -109,10 +108,10 @@ const styles = StyleSheet.create({
   },
   messageInputContainerWrapper: {
     flexDirection: 'row',
-    justifyContent: 'center', // Centers both input and button horizontally
-    alignItems: 'center', // Centers vertically
-    position: 'absolute', // Keeps it fixed to the center even when scrolling
-    bottom: 50, // Adjust the bottom positioning if needed
+    justifyContent: 'center',
+    alignItems: 'center', 
+    position: 'absolute',
+    bottom: 50, 
     zIndex: 1,
     padding: 10,
 

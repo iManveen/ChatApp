@@ -35,7 +35,7 @@ const HomeScreen = ({navigation}) => {
           Alert.alert('Please register first');
         } else {
           setCurrentUsers(currentUserName);
-          // Navigate to the Chat screen
+
           navigation.navigate('ChatScreen', {userName: currentUserName});
         }
       } else {
@@ -56,10 +56,9 @@ const HomeScreen = ({navigation}) => {
 
     Keyboard.dismiss();
   };
-  console.log(allUsers,currentUsers);
+  console.log(allUsers, currentUsers);
   useEffect(() => {
-    if(currentUsers!=='')
-    navigation.navigate('ChatScreen');
+    if (currentUsers !== '') navigation.navigate('ChatScreen');
   }, [currentUsers]);
 
   return (

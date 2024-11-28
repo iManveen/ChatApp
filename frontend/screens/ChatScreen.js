@@ -7,10 +7,12 @@ import {
   View,
 } from 'react-native';
 import React, {useContext, useEffect} from 'react';
-import {GlobalContext} from '../context';
+
 import ChatComponent from '../components/ChatComponent';
-import NewGroupModal from '../components/NewGroupModal';
+
 import {socket} from '../utils';
+import NewGroupModal from '../components';
+import { GlobalContext } from '../context';
 
 const ChatScreen = ({navigation, item}) => {
   const {

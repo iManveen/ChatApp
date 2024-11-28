@@ -10,8 +10,10 @@ import {
   Keyboard,
 } from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
-import {GlobalContext} from '../../context';
-import { socket } from '../../utils';
+
+
+import { GlobalContext } from '../context';
+import { socket } from '../utils';
 
 const NewGroupModal = () => {
   const {modalVisible, setModalVisible, currentGroupName, setCurrentGroupName} =
